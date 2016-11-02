@@ -1,0 +1,33 @@
+<div class="col-md-12">
+  <h2 class="text-center">Product List</h2>
+  <div class="group">
+    <%= link_to("New Product",new_admin_product_path,class:"btn btn-link")%>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Options</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+      <tr>
+        <td>#</td>
+        <td><%= link_to(product.title,admin_product_path(product))%></td>
+        <td><%= simple_format(product.description)%></td>
+        <td><%= product.price %></td>
+        <td><%= product.quantity %></td>
+        <td>
+          <%= link_to("Edit", edit_admin_product_path(product),class:"btn btn-sm btn-default") %>
+          <%= link_to("Delete", admin_product_path(product),class:"btn btn-sm btn-default",method: :delete,data:{confirm:"Are you sure?"}) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
