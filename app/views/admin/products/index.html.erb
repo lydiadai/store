@@ -6,18 +6,28 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <td>#</td>
-        <td>Name</td>
-        <td>Description</td>
-        <td>Price</td>
-        <td>Quantity</td>
-        <td>Options</td>
+        <th>#</th>
+        <th width="220">Product Pic</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Options</th>
       </tr>
     </thead>
     <tbody>
       <% @products.each do |product| %>
       <tr>
-        <td>#</td>
+        <td><%= product.id%></td>
+        <td>
+          <%= link_to admin_product_path(product) do %>
+            <% if product.image.present? %>
+              <%= image_tag(product.image.thumb.url, class: "thumbnail") %>
+            <% else %>
+              <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= link_to(product.title,admin_product_path(product))%></td>
         <td><%= simple_format(product.description)%></td>
         <td><%= product.price %></td>
