@@ -1,8 +1,5 @@
 class OrdersController < ApplicationController
-    before_action :authenticate_user!, only: [:create]
-    def index
-        @orders = Order.all
-    end
+    before_action :authenticate_user!
 
     def create
         @order = Order.new(order_params)
@@ -33,7 +30,7 @@ class OrdersController < ApplicationController
         @order.is_paid = true
         @order.save
         flash[:notice] = '已付款'
-        redirect_to orders_path
+        redirect_to :back
     end
 
     def pay_with_alipay
@@ -41,7 +38,7 @@ class OrdersController < ApplicationController
         @order.is_paid = true
         @order.save
         flash[:notice] = '已付款'
-        redirect_to orders_path
+        redirect_to :back
     end
 
     private

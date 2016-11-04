@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
         resources :products
+        resources :orders
     end
 
     resources :orders do
@@ -23,7 +24,9 @@ Rails.application.routes.draw do
             post :checkout
         end
     end
-
+    namespace :account do
+        resources :orders
+    end
     resources :cart_items
 
     root 'products#index'
