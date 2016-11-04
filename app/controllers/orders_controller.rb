@@ -32,6 +32,7 @@ class OrdersController < ApplicationController
         @order = Order.find_by_token(params[:id])
         @order.is_paid = true
         @order.save
+        flash[:notice] = '已付款'
         redirect_to orders_path
     end
 
@@ -39,6 +40,7 @@ class OrdersController < ApplicationController
         @order = Order.find_by_token(params[:id])
         @order.is_paid = true
         @order.save
+        flash[:notice] = '已付款'
         redirect_to orders_path
     end
 
