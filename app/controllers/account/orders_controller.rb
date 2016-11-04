@@ -4,4 +4,18 @@ class Account::OrdersController < ApplicationController
     def index
         @orders = current_user.orders.order('id DESC')
     end
+
+    def cancell
+        @order = Order.find(params[:id])
+        @order.cancell_order!
+        @order.save
+        redirect_to :back
+        OrderMailer.notify_order_cancelled(@order).deliver!
+    end
+
+    def destroy
+        @order = Order.find(params[:id])
+        @order.destroy
+        redirect_to :back
+    end
 end

@@ -29,6 +29,8 @@ class OrdersController < ApplicationController
         @order = Order.find_by_token(params[:id])
         @order.is_paid = true
         @order.save
+        @order.payment_method = 'wechat'
+        @order.make_payment!
         flash[:notice] = '已付款'
         redirect_to :back
     end
@@ -36,9 +38,32 @@ class OrdersController < ApplicationController
     def pay_with_alipay
         @order = Order.find_by_token(params[:id])
         @order.is_paid = true
+        @order.payment_method = 'alipay'
+        @order.make_payment!
         @order.save
         flash[:notice] = '已付款'
         redirect_to :back
+    end
+
+    def cancell
+        @order = Order.find(params[:id])
+        @order.is_cancelled = false
+        @order.save
+        OrderMailer.notify_order_cancelled(Order.last).deliver!
+    end
+
+    def cancelled
+        @order = Order.find(params[:id])
+        @order.is_cancelled = true
+        @order.save
+        OrderMailer.notify_order_cancelled(Order.last).deliver!
+    end
+
+    def ship
+        @order = Order.find(params[:id])
+        @order.ship!
+        redirect_to :back
+        OrderMailer.notify_order_ship(Order.last).deliver!
     end
 
     private

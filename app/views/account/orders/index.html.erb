@@ -1,29 +1,76 @@
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th> # </th>
-      <th> 加密订单号 </th>
-      <th> 创建时间 </th>
+<div class="col-md-12">
 
-    </tr>
-  </thead>
+    <h2 class="text-center">
+        我的订单
+    </h2>
 
-<tbody>
-   <% @orders.each do |order| %>
-   <tr>
-     <td>
-        <%= order.id %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    序号
+                </th>
+                <th>
+                    购买人
+                </th>
+                <th>
+                    价格
+                </th>
+                <th>
+                    付款方式
+                </th>
+                <th>
+                    付款状态
+                </th>
+                <th>
+                    订单状态
+                </th>
+                <th>
+                    订单操作
+                </th>
+                <th>
+                    删除订单
+                </th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
 
-     </td>
-     <td>
-       <%= link_to(order.token, order_path(order.token)) %>
-     </td>
+        <tbody>
+            <% @orders.each do |order| %>
+            <tr>
+                <td>
+                    <%= order.id %>
+                </td>
+                <td>
+                    <%= order.billing_name %>
+                </td>
+                <td>
+                    <%= order.total %>
+                </td>
+                <td>
+                    <%= order.payment_method %>
+                </td>
+                <td>
+                    <%= order.is_paid %>
+                </td>
+                <td>
+                    <%= order.aasm_state %>
+                </td>
+                <td>
+                  <% if order.aasm_state == 'paid'  %>
+                    <%= link_to("取消订单", cancell_account_order_path(order), :method => :post, :class => "btn btn-danger") %>
+                  <% end %>
 
-     <td>
-       <%= order.created_at %>
-     </td>
-   </tr>
+                    <% if order.aasm_state == 'order_cancelled' %>
+                    <%= link_to("订单已取消", ) %>
+                    <% end %>
 
-   <% end %>
- </tbody>
- </table>
+                </td>
+                <td>
+                    <%= link_to("删除订单", account_order_path(order), :method => :delete, :data => { :confirm => "Are you sure?" }) %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
