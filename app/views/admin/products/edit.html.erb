@@ -12,6 +12,7 @@
 <%= image_tag(@product.image.thumb.url)%>
 <% end %>
 <%= f.input :image,as: :file %>
+<%= f.input :is_hidden%>
 
 <%= f.submit "Submit" %>
 <% end %>

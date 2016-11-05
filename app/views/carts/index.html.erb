@@ -38,7 +38,13 @@
        </td>
 
        <td>
+         <%= link_to("-",minus_cart_item_path(cart_item),method: :post,:class =>"btn btn-primary btn-xs btn-danger")%>
          <%= cart_item.quantity %>
+         <% if cart_item.quantity < cart_item.product.quantity%>
+         <%= link_to("+",add_cart_item_path(cart_item),method: :post,:class =>"btn btn-primary btn-xs btn-danger")%>
+         <% else %>
+         库存不足
+         <% end %>
        </td>
 
        <td>

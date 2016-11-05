@@ -13,7 +13,7 @@ class OrderMailer < ApplicationMailer
         mail(to: @user.email, subject: '[JDstore]你已取消订单 ＃{order.token}')
     end
 
-    def notify_order_placed(order)
+    def notify_order_ship(order)
         @order = order
         @user = order.user
         @product_lists = @order.product_lists

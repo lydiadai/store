@@ -47,14 +47,14 @@ class OrdersController < ApplicationController
 
     def cancell
         @order = Order.find(params[:id])
-        @order.is_cancelled = false
+        @order.is_cancell = false
         @order.save
         OrderMailer.notify_order_cancelled(Order.last).deliver!
     end
 
     def cancelled
         @order = Order.find(params[:id])
-        @order.is_cancelled = true
+        @order.is_cancell = true
         @order.save
         OrderMailer.notify_order_cancelled(Order.last).deliver!
     end

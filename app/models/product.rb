@@ -13,5 +13,14 @@
 #
 
 class Product < ApplicationRecord
-  mount_uploader :image,ImageUploader
+    mount_uploader :image, ImageUploader
+    def hide!
+        self.is_hidden = true
+        save
+    end
+
+    def publish!
+        self.is_hidden = false
+        save
+    end
 end

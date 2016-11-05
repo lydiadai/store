@@ -18,7 +18,10 @@
     <tbody>
       <% @products.each do |product| %>
       <tr>
-        <td><%= product.id%></td>
+
+        <td>
+          <%= render_product_status(product)%>
+          <%= product.id%></td>
         <td>
           <%= link_to admin_product_path(product) do %>
             <% if product.image.present? %>

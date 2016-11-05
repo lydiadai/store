@@ -58,7 +58,7 @@
                 </td>
                 <td>
                   <% if order.aasm_state == 'paid'  %>
-                    <%= link_to("取消订单", cancell_account_order_path(order), :method => :post, :class => "btn btn-danger") %>
+                    <%= link_to("申请取消订单", cancell_account_order_path(order), :method => :post, :class => "btn btn-danger") %>
                   <% end %>
 
                     <% if order.aasm_state == 'order_cancelled' %>
