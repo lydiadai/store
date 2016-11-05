@@ -28,10 +28,9 @@
           <td> <%= order.aasm_state %> </td>
           <td>
              <% if order.aasm_state == 'order_cancelled' %>
-           <%= link_to("订单已取消", "", :class => "btn btn-danger") %>
+               <%= link_to("订单已取消", "", :class => "btn btn-danger") %>
             <% else %>
-
-           <%= link_to("取消订单", cancell_order_path(order), :method => :post, :class => "btn btn-danger") %>
+              <%= link_to("取消订单", cancell_order_path(order), :method => :post, :class => "btn btn-danger") %>
              <% end %>
             </td>
 
@@ -40,7 +39,7 @@
                <%= link_to("出货", ship_order_path(order), :method => :post, :class => "btn btn-danger") %>
 
                <% else %>
-              <%= link_to("已出货", "", :class => "btn btn-danger") %>
+              已出货
 
               <% end %>
              </td>
